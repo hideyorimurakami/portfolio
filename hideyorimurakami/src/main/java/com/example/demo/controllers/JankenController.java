@@ -21,7 +21,7 @@ public class JankenController {
 
 	private final JankenRepository rep;
 
-	@GetMapping("/janken")
+	@GetMapping("/")
 	public String index(Model model, HttpSession s, @ModelAttribute Jankenuser jankenuser,
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
