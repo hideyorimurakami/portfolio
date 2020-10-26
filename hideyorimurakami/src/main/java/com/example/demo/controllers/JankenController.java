@@ -21,16 +21,22 @@ public class JankenController {
 	private final JankenRepository rep;
 
 	@GetMapping("/janken")
-	public String index(Model model, HttpSession s,@ModelAttribute Jankenuser jankenuser,@ModelAttribute Hantei hantei) {
+	public String index(Model model,HttpSession s, @ModelAttribute Jankenuser jankenuser,@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
-		jankenuser.setSessionId(sessionId);
+		if(!(sessionId.equals(jankenuser.getSessionId()))) {
+			jankenuser.setSessionId(sessionId);
+		}
 		rep.save(jankenuser);
+		s.setAttribute("user", jankenuser);
+		s.setAttribute("hantei", hantei);
 		model.addAttribute("msg","選んでください！");
 		return "/janken/janken";
 	}
 
 	@PostMapping("/janken")
-	public String test(@RequestParam String te,Model model,@ModelAttribute Jankenuser jankenuser,@ModelAttribute Hantei hantei) {
+	public String test(@RequestParam String te,HttpSession s,Model model) {
+		Jankenuser jankenuser = (Jankenuser)s.getAttribute("user");
+		Hantei hantei = (Hantei)s.getAttribute("hantei");
 		int you = Integer.parseInt(te);
 		model.addAttribute("msg", hantei.judge(you));
 		model.addAttribute("cpu",hantei.getCpu());
