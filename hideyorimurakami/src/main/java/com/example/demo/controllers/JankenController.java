@@ -40,6 +40,7 @@ public class JankenController {
 		s.setAttribute("user", jankenuser);
 		s.setAttribute("hantei", hantei);
 		model.addAttribute("msg", "選んでください！");
+		model.addAttribute("jankenuser", jankenuser);
 		return "janken";
 	}
 
@@ -53,7 +54,7 @@ public class JankenController {
 		model.addAttribute("msg", hantei.judge(you));
 		model.addAttribute("cpu", hantei.getCpu());
 		model.addAttribute("you", hantei.getYou());
-		model.addAttribute("count", jankenuser.getUsrId());
+		
 		jankenuser.setRound(hantei.getRound());
 		jankenuser.setWin(hantei.getWin());
 		jankenuser.setLose(hantei.getLose());
