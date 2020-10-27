@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Service
-@Scope("session")
 public class Hantei {
 	private int cpu;
 	private int you;
@@ -39,9 +37,20 @@ public class Hantei {
 		case -2:
 			lose++;
 			return "あなたの負けです！";
-		default:
+		case -1:
 			win++;
 			return "あなたの勝ちです！";
+		case 2:
+			win++;
+			return "あなたの勝ちです！";
+		default:
+			round = 0;
+			win = 0;
+			draw = 0;
+			lose = 0;
+			this.cpu = 4;
+			this.you = 4;
+			return "リセットしました。";
 		}
 	}
 }
