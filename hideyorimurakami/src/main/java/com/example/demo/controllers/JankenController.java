@@ -22,17 +22,18 @@ public class JankenController {
 	private final JankenRepository rep;
 	Jankenuser jankenuser;
 	Hantei hantei;
+
 	@GetMapping("/janken")
 	public String index(Model model, HttpSession s, @ModelAttribute Jankenuser jankenuser,
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
-		if(!(rep.existsBySessionId(sessionId))){
+		if (!(rep.existsBySessionId(sessionId))) {
 			jankenuser.setSessionId(sessionId);
 			rep.save(jankenuser);
-			int usrId = (int)rep.count();
+			int usrId = (int) rep.count();
 			jankenuser.setUsrId(usrId);
 			rep.save(jankenuser);
-		}else {
+		} else {
 			jankenuser = (Jankenuser) s.getAttribute("user");
 			hantei = (Hantei) s.getAttribute("hantei");
 		}
@@ -41,26 +42,27 @@ public class JankenController {
 		s.setAttribute("hantei", hantei);
 		model.addAttribute("msg", "選んでください！");
 		model.addAttribute("jankenuser", jankenuser);
-		return "janken";
+		return "janken/janken";
 	}
 
 	@PostMapping("/janken")
 	public String test(@RequestParam String te, HttpSession s, Model model) {
-		Jankenuser jankenuser = (Jankenuser) s.getAttribute("user");
-		Hantei hantei = (Hantei) s.getAttribute("hantei");
+		jankenuser = (Jankenuser) s.getAttribute("user");
+		hantei = (Hantei) s.getAttribute("hantei");
 
 		int you = Integer.parseInt(te);
 
 		model.addAttribute("msg", hantei.judge(you));
 		model.addAttribute("cpu", hantei.getCpu());
 		model.addAttribute("you", hantei.getYou());
-		
+
 		jankenuser.setRound(hantei.getRound());
 		jankenuser.setWin(hantei.getWin());
 		jankenuser.setLose(hantei.getLose());
 		jankenuser.setDraw(hantei.getDraw());
+
 		rep.save(jankenuser);
 		model.addAttribute("jankenuser", jankenuser);
-		return "janken";
+		return "janken/janken";
 	}
 }
