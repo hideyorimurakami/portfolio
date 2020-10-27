@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JankenRepository extends JpaRepository<Jankenuser, Integer>{
-
+	boolean existsBySessionId(String sessionId);
 }
