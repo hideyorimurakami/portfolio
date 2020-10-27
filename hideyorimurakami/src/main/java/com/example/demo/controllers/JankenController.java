@@ -25,6 +25,11 @@ public class JankenController {
 	public String index(Model model, HttpSession s, @ModelAttribute Jankenuser jankenuser,
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
+		if(!(sessionId.equals(jankenuser.getSessionId()))){
+			int usrId = jankenuser.getUsrId();
+			usrId++;
+			jankenuser.setUsrId(usrId);
+		}
 		jankenuser.setSessionId(sessionId);
 		rep.save(jankenuser);
 
@@ -45,7 +50,6 @@ public class JankenController {
 		model.addAttribute("cpu", hantei.getCpu());
 		model.addAttribute("you", hantei.getYou());
 		jankenuser.setRound(hantei.getRound());
-		;
 		jankenuser.setWin(hantei.getWin());
 		jankenuser.setLose(hantei.getLose());
 		jankenuser.setDraw(hantei.getDraw());
