@@ -26,8 +26,7 @@ public class JankenController {
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
 		if(!(sessionId.equals(jankenuser.getSessionId()))){
-			int usrId = jankenuser.getUsrId();
-			usrId++;
+			int usrId = (int)rep.count();
 			jankenuser.setUsrId(usrId);
 		}
 		jankenuser.setSessionId(sessionId);
