@@ -25,11 +25,10 @@ public class JankenController {
 	public String index(Model model, HttpSession s, @ModelAttribute Jankenuser jankenuser,
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
-		if(!(sessionId.equals(jankenuser.getSessionId()))){
-			int usrId = (int)rep.count();
-			jankenuser.setUsrId(usrId);
-		}
 		jankenuser.setSessionId(sessionId);
+		rep.save(jankenuser);
+		int usrId = (int)rep.count();
+		jankenuser.setUsrId(usrId);
 		rep.save(jankenuser);
 
 		s.setAttribute("user", jankenuser);
