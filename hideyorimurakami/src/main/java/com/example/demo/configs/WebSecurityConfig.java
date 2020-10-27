@@ -17,8 +17,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
             .antMatchers("/**").permitAll();
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
 
         // 認証サンプル動作時は、以下のコメントを外してください
         /*
