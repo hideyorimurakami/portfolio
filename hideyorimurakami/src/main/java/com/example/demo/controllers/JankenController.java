@@ -20,17 +20,21 @@ import lombok.RequiredArgsConstructor;
 public class JankenController {
 
 	private final JankenRepository rep;
-
+	Jankenuser jankenuser;
+	Hantei hantei;
 	@GetMapping("/janken")
 	public String index(Model model, HttpSession s, @ModelAttribute Jankenuser jankenuser,
 			@ModelAttribute Hantei hantei) {
 		String sessionId = s.getId();
-			if(!(sessionId.equals(jankenuser.getSessionId()))){
+		if(!(rep.existsBySessionId(sessionId))){
 			jankenuser.setSessionId(sessionId);
 			rep.save(jankenuser);
 			int usrId = (int)rep.count();
 			jankenuser.setUsrId(usrId);
 			rep.save(jankenuser);
+		}else {
+			jankenuser = (Jankenuser) s.getAttribute("user");
+			hantei = (Hantei) s.getAttribute("hantei");
 		}
 
 		s.setAttribute("user", jankenuser);
@@ -49,6 +53,7 @@ public class JankenController {
 		model.addAttribute("msg", hantei.judge(you));
 		model.addAttribute("cpu", hantei.getCpu());
 		model.addAttribute("you", hantei.getYou());
+		model.addAttribute("count", jankenuser.getUsrId());
 		jankenuser.setRound(hantei.getRound());
 		jankenuser.setWin(hantei.getWin());
 		jankenuser.setLose(hantei.getLose());
