@@ -63,6 +63,11 @@ public class JankenController {
 
 		rep.save(jankenuser);
 		model.addAttribute("jankenuser", jankenuser);
-		return "janken/janken";
+		if(hantei.getRound() == 100) {
+			return "janken/thankyou";
+		}else {
+			return "janken/janken";
+		}
+
 	}
 }
