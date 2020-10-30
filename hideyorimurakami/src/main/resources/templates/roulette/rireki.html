@@ -20,35 +20,35 @@ function submit(val){
 </head>
 <body>
 
-<table class="table" border="1" style="float:left; margin-right:5px;">
+<table class="table1" border="1" style="float:left; margin-right:5px;" >
 <thead>
 <tr>
-<th th:class="th37" colspan="2" id="button" th:onclick="submit(37)">0</th>
-<th th:class="th38" colspan="2" id="button" th:onclick="submit(38)">00</th>
+<th th:class="th37" colspan="2" id="button" th:onclick="submit(37)" width="80px" height="50px">0</th>
+<th th:class="th38" colspan="2" id="button" th:onclick="submit(38)" width="80px" height="50px">00</th>
 
 </thead>
 <tbody>
 
 <tr th:each="i : ${#numbers.sequence(1,34,3)}">
-      <th th:class="|th${i}|" id="button" th:onclick="|submit('${i}')|">[[${i}]]</th>
-      <th th:class="|th${i+1}|" colspan="2" id="button" th:onclick="|submit('${i+1}')|">[[${i+1}]]</th>
-      <th th:class="|th${i+2}|" id="button" th:onclick="|submit('${i+2}')|">[[${i+2}]]</th>
+      <th width="55px" height="50px" th:class="|th${i}|" id="button" th:onclick="|submit('${i}')|">[[${i}]]</th>
+      <th width="25px" height="50px" th:class="|th${i+1}|" colspan="2" id="button" th:onclick="|submit('${i+1}')|">[[${i+1}]]</th>
+      <th width="55px" height="50px" th:class="|th${i+2}|" id="button" th:onclick="|submit('${i+2}')|">[[${i+2}]]</th>
     </tr>
 </tbody>
 
 </table>
-<table class="table" border="1">
+<table class="table2" border="1">
 <thead>
 <tr>
-<th>履歴</th>
+<th width="55px" height="50px">履歴</th>
 
 </thead>
 <tbody>
 
 <tr th:each="i : ${al}" th:switch="${i.num}">
-      <th  th:case="37" th:class="|th${i.num}|" >0</th>
-      <th  th:case="38" th:class="|th${i.num}|" >00</th>
-      <th  th:case="*" th:class="|th${i.num}|" >[[${i.num}]]</th>
+      <th width="55px" height="50px"  th:case="37" th:class="|th${i.num}|" >0</th>
+      <th width="55px" height="50px"  th:case="38" th:class="|th${i.num}|" >00</th>
+      <th width="55px" height="50px"  th:case="*" th:class="|th${i.num}|" >[[${i.num}]]</th>
     </tr>
 </tbody>
 
