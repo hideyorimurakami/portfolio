@@ -30,9 +30,9 @@ public String rouletterirek(@RequestParam int num, @ModelAttribute Rireki rireki
 		al.clear();
 	}else {
 		rireki.setNum(num);
-		al.add(rireki);
-		if(al.size() == 13) {
-			al.remove(0);
+		al.add(0,rireki);
+		if(al.size() == 37) {
+			al.remove(al.size() -1);
 		}
 	}
 
