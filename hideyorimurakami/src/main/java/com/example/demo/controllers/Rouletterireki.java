@@ -26,11 +26,16 @@ public String getRouletterirek(HttpSession s) {
 public String rouletterirek(@RequestParam int num, @ModelAttribute Rireki rireki ,Model model,HttpSession s) {
 	s.getAttribute("s");
 	al = (ArrayList<Rireki>)s.getAttribute("s");
-	rireki.setNum(num);
-	al.add(rireki);
-	if(al.size() == 13) {
-		al.remove(0);
+	if(num==0) {
+		al.clear();
+	}else {
+		rireki.setNum(num);
+		al.add(rireki);
+		if(al.size() == 13) {
+			al.remove(0);
+		}
 	}
+
 	model.addAttribute("al",al);
 	s.setAttribute("s", al);
 	return "roulette/rireki";
