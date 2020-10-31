@@ -37,12 +37,18 @@ function submit(val){
 </tbody>
 <tfoot>
 <tr>
-<td colspan="4">
+<th colspan="2">
 <form th:action="@{/roulettehistoryboard}" method="post">
-<input type="submit"    value="リセット"  >
+<input type="submit"    value="reset"  >
 <input type="hidden"  name="num" value="0">
 </form>
-</td>
+</th>
+<th colspan="2">
+<form th:action="@{/roulettehistoryboard}" method="post">
+<input type="submit"    value="random"  >
+<input type="hidden"  name="num" value="39">
+</form>
+</th>
 </tr>
 </tfoot>
 </table>
