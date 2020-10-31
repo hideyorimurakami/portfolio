@@ -42,6 +42,9 @@ public String rouletterirek(@RequestParam int num, @ModelAttribute RouletteHisto
 		al2.clear();
 		al3.clear();
 	}else {
+		if(num == 39) {
+			num = (int)(Math.random() *38 + 1);
+		}
 		roulettehistory.setNum(num);
 
 		if(al.size() < 13) {
