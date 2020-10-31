@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<style type="text/css">
+*{background-color: green;color: yellow;}
+</style>
+<title>BlackJack Strategy</title>
+</head>
+<body>
+<h1>BlackJack Strategy</h1>
+<form th:action="@{/blackjackstrategy}" method="post" th:name="form" th:object="${blackJackStrategy}">
+<table>
+<tbody>
+<tr>
+<td>
+Dealer1st
+</td>
+
+<td>
+<select th:field="*{dealer}" >
+<th:block th:each="i : ${#numbers.sequence(0,10)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="1" th:value="${i}" >A</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Player1st
+</td>
+
+<td>
+<select th:field="*{player1}" >
+<th:block th:each="i : ${#numbers.sequence(0,10)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="1" th:value="${i}" >A</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Player2nd
+</td>
+<td>
+<select th:field="*{player2}" >
+<th:block th:each="i : ${#numbers.sequence(0,10)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="1" th:value="${i}" >A</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+
+<tr>
+<td>
+<input type="submit" value="Submit" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<div th:if="${blackJackStrategy.result ne null}">
+<p>Result : [[${blackJackStrategy.result}]]</p>
+<form th:action="@{/blackjackstrategy}" method="get" th:name="form" >
+<input type="submit" value="Reset" />
+</form>
+</div>
+</body>
+</html>
