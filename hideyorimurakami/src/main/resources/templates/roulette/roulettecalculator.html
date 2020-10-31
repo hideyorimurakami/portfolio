@@ -103,6 +103,9 @@ Line
 </form>
 <div th:if="${rouletteCalculator.result ne 0}">
 <p>Pay : [[${rouletteCalculator.result}]]</p>
+<form th:action="@{/roulettecalculator}" method="get" th:name="form" th:object="${rouletteCalculator}">
+<input type="submit" value="Reset" />
+</form>
 </div>
 </body>
 </html>
