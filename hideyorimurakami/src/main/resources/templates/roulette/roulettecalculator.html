@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<style type="text/css">
+*{background-color: green;color: yellow;}
+</style>
+<title>Roulette Calculator</title>
+</head>
+<body>
+<h1>Roulette Calculator</h1>
+<form th:action="@{/roulettecalculator}" method="post" th:name="form" th:object="${rouletteCalculator}">
+<table>
+<tbody>
+<tr>
+<td>
+Single
+</td>
+<td>
+35 to 1
+</td>
+<td>
+<select th:field="*{single}" >
+<th:block th:each="i : ${#numbers.sequence(0,20)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Split
+</td>
+<td>
+7 to 1
+</td>
+<td>
+<select th:field="*{split}" >
+<th:block th:each="i : ${#numbers.sequence(0,20)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Corner
+</td>
+<td>
+8 to 1
+</td>
+<td>
+<select th:field="*{corner}" >
+<th:block th:each="i : ${#numbers.sequence(0,20)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Street
+</td>
+<td>
+11 to 1
+</td>
+<td>
+<select th:field="*{street}" >
+<th:block th:each="i : ${#numbers.sequence(0,20)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+Line
+</td>
+<td>
+5 to 1
+</td>
+<td>
+<select th:field="*{line}" >
+<th:block th:each="i : ${#numbers.sequence(0,20)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="*" th:value="${i}">[[${i}]]</option>
+</th:block>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+<input type="submit" value="Bet" />
+</td>
+</tr>
+</tbody>
+</table>
+</form>
+<div th:if="${rouletteCalculator.result ne 0}">
+<p>Pay : [[${rouletteCalculator.result}]]</p>
+</div>
+</body>
+</html>
