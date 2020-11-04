@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<script type="text/javascript">
+
+function submit(val){
+	document.form1.select.value=val;
+	document.form1.submit();
+}
+function select1(){
+	document.form3.select.value=1;
+	document.form3.selectS.value=0;
+	document.form3.submit();
+}
+function select2(){
+	document.form3.select.value=2;
+	document.form3.selectS.value=0;
+	document.form3.submit();
+}
+function selectS1(){
+	document.form3.select.value=0;
+	document.form3.selectS.value=1;
+	document.form3.submit();
+}
+function selectS2(){
+	document.form3.select.value=0;
+	document.form3.selectS.value=2;
+	document.form3.submit();
+}
+
+function NewGame(){
+	document.form2.submit();
+}
+
+function clickBtn1(){
+	const data = document.getElementById("data");
+
+	if(data.style.display=="block"){
+		// noneで非表示
+		data.style.display ="none";
+	}else{
+		// blockで表示
+		data.style.display ="block";
+	}
+}
+</script>
+<style type="text/css">
+*{background-color: green;color: yellow;}
+#button {cursor:pointer;}
+#data {display :none;}
+</style>
+<title>BlackJack</title>
+</head>
+<body>
+<h1>BlackJack</h1>
+Your Name : [[${name}]]<br>
+Your Money : [[${blackJack.money}]] $<br>
+<th:block th:if="${blackJack.end ne 0}" >
+How much do you bet?<br>
+<form th:action="@{/blackjack}" method="post" th:name="form2">
+<select name = "bet">
+<th:block th:each="i : ${#numbers.sequence(0,10)}" th:switch="${i}">
+	<option th:case="0" th:value="${i}" >Select</option>
+	<option th:case="1" th:value="|${i}000|" selected="selected" >1000 $</option>
+	<option th:case="*" th:value="|${i}000|">[[${i}]]000 $</option>
+</th:block>
+</select>
+<input th:if="${blackJack.end ne 0}" type="hidden"  name="select" value="0">
+<input th:if="${blackJack.end ne 0}" type="hidden"  name="selectS" value="0">
+</form>
+</th:block>
+<div th:if="${blackJack.end ne 1}">
+<h4>Dealer 1st: [[${blackJack.dealer1st}]]</h4>
+<table>
+<tr>
+<td>
+<img th:src="'/bjimg/' + ${blackJack.dealer.get(0)} + '.png'" height="60" width="40"   th:alt-title="Dealer">
+<td>
+<img th:src="'/bjimg/bk0.png'" height="60" width="40"   th:alt-title="Dealer">
+</td>
+</tr>
+
+</table>
+</div>
+<div th:if="${blackJack.end ne 0}">
+<th:block th:if="${blackJack.start ne 1}">
+<h4>Dealer : [[${blackJack.sumD}]]</h4>
+</th:block>
+<table>
+<tr>
+<th:block th:each="d:${blackJack.dealer}">
+<td>
+<img th:src="'/bjimg/' + ${d} + '.png'" height="60" width="40"   th:alt-title="Dealer">
+</td>
+</th:block>
+</tr>
+</table>
+</div>
+<th:block th:if="${blackJack.start ne 1}">
+<h4>You : [[${blackJack.sumP}]]</h4>
+</th:block>
+<table>
+<tr>
+<th:block th:each="p :${blackJack.player}">
+<td>
+<img th:src="'/bjimg/' + ${p} + '.png'" height="60" width="40"   th:alt-title="Player">
+</td>
+</th:block>
+</tr>
+</table>
+<div th:if="${blackJack.splitOn ne 0}">
+<h4>Split : [[${blackJack.sumS}]]</h4>
+<table>
+<tr>
+<th:block th:each="s:${blackJack.split}"  >
+<td>
+<img th:src="'/bjimg/' + ${s} + '.png'" height="60" width="40"   th:alt-title="Split">
+</td>
+</th:block>
+</tr>
+</table>
+</div>
+<th:block th:if="${blackJack.end ne 0}" >
+<th:block th:if="${blackJack.splitOn ne 1}" >
+[[${blackJack.msg}]]<br>
+</th:block>
+<th:block th:if="${blackJack.splitOn ne 0}" >
+[[${blackJack.splitResultMsg1}]]<br>
+[[${blackJack.splitResultMsg2}]]
+</th:block>
+</th:block>
+<th:block th:if="${blackJack.end ne 1}" >
+[[${blackJack.msg}]]
+<table border="1"  th:if="${blackJack.splitOn ne 1}">
+<tr>
+<th th:class="th1"  id="button" th:onclick="submit(1)" width="40px" height="40px">Hit</th>
+<th th:class="th1"  id="button" th:onclick="submit(2)" width="50px" height="40px">Stay</th>
+<th th:if="${blackJack.doubledownCheck  ne 0}" th:class="th1"  id="button" th:onclick="submit(3)" width="65px" height="40px">Double</th>
+<th th:if="${blackJack.splitCheck ne 0}" th:class="th1"  id="button" th:onclick="submit(4)" width="55px" height="40px">Split</th>
+<th th:if="${blackJack.surrenderCheck ne 0}" th:class="th1"  id="button" th:onclick="submit(5)" width="76px" height="40px">Surrender</th>
+</tr>
+
+</table>
+
+<table border="1"  th:if="${blackJack.splitOn ne 0}">
+<tr>
+<td colspan="2">
+Split1
+</td>
+</tr>
+<tr>
+<tr>
+<th th:if="${blackJack.splitEndP ne 1}" th:class="th1"  id="button" th:onclick="select1()" width="40px" height="40px">Hit</th>
+<th th:if="${blackJack.splitEndP ne 1}" th:class="th1"  id="button" th:onclick="select2()" width="50px" height="40px">Stay</th>
+
+</tr>
+</table>
+<th:block th:if="${blackJack.splitOn ne 0}" >
+[[${blackJack.msgS}]]
+</th:block>
+<table border="1"  th:if="${blackJack.splitOn ne 0}">
+<tr>
+<td colspan="3">
+Split2
+</td>
+</tr>
+<tr>
+<th:block th:if="${blackJack.splitEndP ne 0}" >
+<th th:if="${blackJack.splitEndS ne 1}" th:class="th1"  id="button" th:onclick="selectS1(1)" width="40px" height="40px">Hit</th>
+<th th:if="${blackJack.splitEndS ne 1}" th:class="th1"  id="button" th:onclick="selectS2(2)" width="50px" height="40px">Stay</th>
+</th:block>
+</tr>
+
+
+</table>
+</th:block>
+<table border="1" th:if="${blackJack.end ne 0}">
+<tr>
+<th th:class="thNG"  id="button" th:onclick="NewGame()" width="72px" height="40px">NewGame!!</th>
+</tr>
+</table>
+<form th:action="@{/blackjack}" method="post" th:name="form1">
+<input th:if="${blackJack.splitOn ne 1}" type="hidden"  name="selectS" value="0">
+      <input type="hidden"  name="select" >
+      <input th:if="${blackJack.end ne 1}" type="hidden"  name="bet" value="0">
+      </form>
+<form th:action="@{/blackjack}" method="post" th:name="form3">
+      <input type="hidden"  name="select" >
+       <input type="hidden"  name="selectS" >
+       <input th:if="${blackJack.end ne 1}" type="hidden"  name="bet" value="0">
+      </form>
+      <br>
+<input type="button" value="Show Your Data" onclick="clickBtn1()" />
+<div  id="data">
+<table>
+<tbody>
+<tr><td colspan="2">Your Data</td></tr>
+<tr><td>Round</td><td>[[${data.round}]]</td></tr>
+<tr><td>Win</td><td>[[${data.win}]]</td></tr>
+<tr><td>BJWin</td><td>[[${data.bjwin}]]</td></tr>
+<tr><td>Lose</td><td>[[${data.lose}]]</td></tr>
+<tr><td>Push</td><td>[[${data.push}]]</td></tr>
+<tr><td>Bust</td><td>[[${data.bust}]]</td></tr>
+<tr><td>Surrender</td><td>[[${data.surrender}]]</td></tr>
+<tr><td>Splitround</td><td>[[${data.splitround}]]</td></tr>
+<tr><td>Doubledown</td><td>[[${data.doubledown}]]</td></tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
