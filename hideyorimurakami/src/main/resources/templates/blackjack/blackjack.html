@@ -34,6 +34,10 @@ function NewGame(){
 	document.form2.submit();
 }
 
+function LogOut(){
+	document.location.href = "/logout";
+}
+
 function clickBtn1(){
 	const data = document.getElementById("data");
 
@@ -177,6 +181,7 @@ Split2
 <table border="1" th:if="${blackJack.end ne 0}">
 <tr>
 <th th:class="thNG"  id="button" th:onclick="NewGame()" width="72px" height="40px">NewGame!!</th>
+<th th:class="thNG"  id="button" th:onclick="LogOut()" width="60px" height="40px">LogOut</th>
 </tr>
 </table>
 <form th:action="@{/blackjack}" method="post" th:name="form1">
