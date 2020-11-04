@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hideyori Murakami</title>
+</head>
+<body>
+<p>いらっしゃいませ。ここは村上英之のポートフォリオ置き場です。</p>
+<table>
+<tr><td>■自己紹介</td></tr>
+<tr><td>2020年6月から職業訓練校でJavaを学習。<br>
+				2020年7月、ITパスポート取得。<br>
+				2020年9月、JavaSlilverSE8取得。<br>
+</td></tr>
+<tr><td>■スキル</td></tr>
+<tr><td>Java,Javascript,css,html,MySQL,PostgreSQL,JSP/サーブレット,Spring<br>
+				git,github,Heroku,Eclipse
+</td></tr>
+<tr><td>■ポートフォリオ</td></tr>
+<tr><td>●<a th:href="@{/janken}">じゃんけん</a></td></tr>
+<tr><td>Springを学ぶため最初に作った人生初のWebアプリ。<br>
+				Springの基本的な使い方やセッション情報の管理を学習。<br>
+				PostgreSQLとHeroku、Gitの使い方を学習。
+</td></tr>
+<tr><td>●<a th:href="@{/roulettehistoryboard}">ルーレット履歴</a></td></tr>
+<tr><td>友人のリクエストに応えて作った人生二つ目のWebアプリ。<br>
+				Thymeleafの使い方やJavascriptを学習。
+				Heroku、Gitの使い方をおさらい。
+</td></tr>
+<tr><td>●<a th:href="@{/roulettecalculator}">ルーレット計算機</a></td></tr>
+<tr><td>友人のリクエストに応えて作った人生三つ目のWebアプリ。<br>
+				Springの基本的な使い方のおさらい。
+</td></tr>
+<tr><td>●<a th:href="@{/blackjackstrategy}">ブラックジャックの戦略アプリ</a></td></tr>
+<tr><td>友人のリクエストに応えて作った人生四つ目のWebアプリ。<br>
+				Spring,Heroku,Gitに慣れるため制作。
+</td></tr>
+<tr><td>★<a th:href="@{blackjack}">ブラックジャックアプリ</a></td></tr>
+<tr><td>これまで作ったアプリで学んだ知識をフル活用したゲームアプリ。<br>
+				ログイン・セキュリティ機能とユーザ情報のデータベース管理を学習。
+</td></tr>
+</table>
+</body>
+</html>
