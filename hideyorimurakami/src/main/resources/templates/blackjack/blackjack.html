@@ -56,15 +56,15 @@ function clickBtn1(){
 <body>
 <h1>BlackJack</h1>
 Your Name : [[${name}]]<br>
-Your Money : [[${blackJack.money}]] $<br>
+Your Money : $ [[${blackJack.money}]]<br>
 <th:block th:if="${blackJack.end ne 0}" >
 How much do you bet?<br>
 <form th:action="@{/blackjack}" method="post" th:name="form2">
 <select name = "bet">
 <th:block th:each="i : ${#numbers.sequence(0,10)}" th:switch="${i}">
 	<option th:case="0" th:value="${i}" >Select</option>
-	<option th:case="1" th:value="|${i}000|" selected="selected" >1000 $</option>
-	<option th:case="*" th:value="|${i}000|">[[${i}]]000 $</option>
+	<option th:case="1" th:value="|${i}000|" selected="selected" >$ 1000</option>
+	<option th:case="*" th:value="|${i}000|">$ [[${i}]]000</option>
 </th:block>
 </select>
 <input th:if="${blackJack.end ne 0}" type="hidden"  name="select" value="0">
