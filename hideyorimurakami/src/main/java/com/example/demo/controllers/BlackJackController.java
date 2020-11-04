@@ -25,6 +25,17 @@ public class BlackJackController {
 	public String getBlackJack(Model model,HttpSession s,Principal principal ) {
 		//ユーザ名と一致するBjUserをセット
 		bju = rep.findByUsername(principal.getName());
+		//各項目をデータベースから引き出す
+		bj.setRound(bju.getRound());
+		bj.setWin(bju.getWin());
+		bj.setBjwin(bju.getBjwin());
+		bj.setLose(bju.getLose());
+		bj.setSurrender(bju.getSurrender());
+		bj.setSplitround(bju.getSplitround());
+		bj.setDoubledown(bju.getDoubledown());
+		bj.setBust(bju.getBust());
+		bj.setPush(bju.getPush());
+		bj.setMoney(bju.getMoney());
 		//セッションにオブジェクトをセット
 		s.setAttribute("bju", bju);
 		s.setAttribute("bj", bj);
