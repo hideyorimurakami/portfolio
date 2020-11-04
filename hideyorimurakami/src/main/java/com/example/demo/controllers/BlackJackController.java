@@ -41,6 +41,8 @@ public class BlackJackController {
 		//セッション情報を取得
 		bju = (BjUser)s.getAttribute("bju");
 		bj = (BlackJack)s.getAttribute("bj");
+		//ユーザ名をセット
+		model.addAttribute("name",bju.getUsername());
 		//ゲーム終了時にニューベット
 		if(bj.getEnd() == 1) {
 			bj.newBet(bet);
