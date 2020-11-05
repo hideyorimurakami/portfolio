@@ -87,6 +87,7 @@ How much do you bet?<br>
 </tr>
 
 </table>
+
 </div>
 <div th:if="${blackJack.end ne 0}">
 <th:block th:if="${blackJack.start ne 1}">
@@ -102,6 +103,9 @@ How much do you bet?<br>
 </tr>
 </table>
 </div>
+<th:block th:if="${blackJack.end ne 0}" >
+<h1>[[${blackJack.msgGetMoney}]]</h1>
+</th:block>
 <th:block th:if="${blackJack.start ne 1}">
 <h4>You : [[${blackJack.sumP}]]</h4>
 </th:block>
@@ -114,7 +118,11 @@ How much do you bet?<br>
 </th:block>
 </tr>
 </table>
+
 <div th:if="${blackJack.splitOn ne 0}">
+<th:block th:if="${blackJack.end ne 0}" >
+<h1>[[${blackJack.msgGetMoneyS}]]</h1>
+</th:block>
 <h4>Split : [[${blackJack.sumS}]]</h4>
 <table>
 <tr>
