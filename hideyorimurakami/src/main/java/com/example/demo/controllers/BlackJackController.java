@@ -57,7 +57,10 @@ public class BlackJackController {
 		model.addAttribute("name",bju.getUsername());
 		//ゲーム終了時にニューベット
 		if(bj.getEnd() == 1) {
-			bj.newBet(bet);
+			if(bet <= bj.getMoney()) {
+				bj.newBet(bet);
+			}
+
 		}
 		//ニューゲーム
 		if(bj.getStart() == 1 && bj.getBet() != 0) {
