@@ -554,6 +554,8 @@ public class BlackJack {
 		money += bet/2;
 		surrender++;
 		msg = "Surrender";
+		msgGetMoney = "+ $ " + bet/2;
+
 	}
 	//ブラックジャックかどうかチェック
 	public boolean bjCheck(ArrayList<String> al) {
