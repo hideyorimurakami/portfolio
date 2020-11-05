@@ -52,8 +52,10 @@ function clickBtn1(){
 </script>
 <style type="text/css">
 *{background-color: green;color: yellow;}
-#button {cursor:pointer;}
+#button {cursor:pointer;background-color: blue;color: white;}
+#button2 {cursor:pointer;background-color: red;color: white;}
 #data {display :none;}
+.msg{color:red;font-weight:bold;}
 </style>
 <title>BlackJack</title>
 </head>
@@ -126,15 +128,21 @@ How much do you bet?<br>
 </div>
 <th:block th:if="${blackJack.end ne 0}" >
 <th:block th:if="${blackJack.splitOn ne 1}" >
+<div class="msg">
 [[${blackJack.msg}]]<br>
+</div>
 </th:block>
 <th:block th:if="${blackJack.splitOn ne 0}" >
+<div class="msg">
 [[${blackJack.splitResultMsg1}]]<br>
 [[${blackJack.splitResultMsg2}]]
+</div>
 </th:block>
 </th:block>
 <th:block th:if="${blackJack.end ne 1}" >
+<div class="msg">
 [[${blackJack.msg}]]
+</div>
 <table border="1"  th:if="${blackJack.splitOn ne 1}">
 <tr>
 <th th:class="th1"  id="button" th:onclick="submit(1)" width="40px" height="40px">Hit</th>
@@ -160,7 +168,9 @@ Split1
 </tr>
 </table>
 <th:block th:if="${blackJack.splitOn ne 0}" >
+<div class="msg">
 [[${blackJack.msgS}]]
+</div>
 </th:block>
 <table border="1"  th:if="${blackJack.splitOn ne 0}">
 <tr>
@@ -181,7 +191,7 @@ Split2
 <table border="1" th:if="${blackJack.end ne 0}">
 <tr>
 <th th:class="thNG"  id="button" th:onclick="NewGame()" width="72px" height="40px">NewGame!!</th>
-<th th:class="thNG"  id="button" th:onclick="LogOut()" width="60px" height="40px">LogOut</th>
+<th th:class="thLogOut"  id="button2" th:onclick="LogOut()" width="60px" height="40px">LogOut</th>
 </tr>
 </table>
 <form th:action="@{/blackjack}" method="post" th:name="form1">
