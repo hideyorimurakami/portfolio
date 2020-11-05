@@ -20,9 +20,10 @@ import lombok.RequiredArgsConstructor;
 public class BlackJackController {
 	private final BjUserRepository rep;
 	BjUser bju;
-	BlackJack bj = new BlackJack();
+	BlackJack bj;
 	@GetMapping("/blackjack")
 	public String getBlackJack(Model model,HttpSession s,Principal principal ) {
+		bj = new BlackJack();
 		//ユーザ名と一致するBjUserをセット
 		bju = rep.findByUsername(principal.getName());
 		//各項目をデータベースから引き出す
