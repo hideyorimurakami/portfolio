@@ -27,6 +27,8 @@ public class BlackJack {
 	private String msgS;
 	private String splitResultMsg1;
 	private String splitResultMsg2;
+	private String msgGetMoney;
+	private String msgGetMoneyS;
 	private int splitCheck; //1の時スプリット可能
 	private int surrenderCheck; //1の時サレンダー可能
 	private int doubledownCheck; //1の時ダブルダウン可能
@@ -82,6 +84,8 @@ public class BlackJack {
 		msgS = "";
 		splitResultMsg1 = "";
 		splitResultMsg2 = "";
+		msgGetMoney = "";
+		msgGetMoneyS = "";
 		round++;
 		money -= bet;
 		deckSet();
@@ -108,18 +112,21 @@ public class BlackJack {
 					money += bet;
 					push++;
 					msg = "Dealer BlackJack Push";
+					msgGetMoney = "+ $ " + bet;
 					end  = 1;
 				}else {
 					money += bet + bet * 1.5;
 					win++;
 					bjwin++;
 					msg = "BlackJack You Win!!";
+					msgGetMoney = "+ $ " + (bet + bet *1.5);
 					end  = 1;
 				}
 			}else {
 				if (bjCheck(dealer)) {
 					lose++;
 					msg = "Dealer BlackJack You Lose";
+					msgGetMoney = "- $ " + bet ;
 					end  = 1;
 				}else {
 					splitCheck();
@@ -134,6 +141,7 @@ public class BlackJack {
 					win++;
 					bjwin++;
 					msg = "BlackJack Win!!";
+					msgGetMoney = "+ $ " + (bet + bet *1.5);
 					end  = 1;
 			}else {
 				splitCheck();
@@ -241,6 +249,7 @@ public class BlackJack {
 			dealerDrawCard();
 			if(bustCheckD()){
 				splitResultMsg1 = "Dealer Bust! Split1 Win!";
+				msgGetMoney = "+ $ " + bet *2;
 				splitEndP = 1;
 				if(splitEndP ==1&&splitEndS == 1) {
 					end = 1;
@@ -278,6 +287,7 @@ public class BlackJack {
 			dealerDrawCard();
 			if(bustCheckD()){
 				splitResultMsg2 = "Dealer Bust! Split2 Win!";
+				msgGetMoneyS = "+ $ " + bet * 2;
 				splitEndS = 1;
 				if(splitEndP ==1&&splitEndS == 1) {
 					end = 1;
@@ -298,13 +308,16 @@ public class BlackJack {
 			push++;
 			money += bet;
 			msg = "push";
+			msgGetMoney = "+ $ " + bet;
 		}else if(sumP > sumD) {
 			win++;
 			money += bet * 2;
 			msg = "You Win!";
+			msgGetMoney = "+ $ " + bet *2;
 		}else {
 			lose++;
 			msg = "You Lose";
+			msgGetMoney = "- $ " + bet;
 		}
 	}
 	//スプリット1のジャッジｊ
@@ -313,13 +326,16 @@ public class BlackJack {
 			push++;
 			money += bet;
 			splitResultMsg1 = "Split1 push";
+			msgGetMoney = "+ $ " + bet;
 		}else if(sumP > sumD) {
 			win++;
 			money += bet * 2;
 			splitResultMsg1 = "Split1 Win!";
+			msgGetMoney = "+ $ " + bet *2;
 		}else {
 			lose++;
 			splitResultMsg1 = "Split1 Lose";
+			msgGetMoney = "- $ " + bet;
 		}
 	}
 	//スプリット2のジャッジ
@@ -328,13 +344,16 @@ public class BlackJack {
 			push++;
 			money += bet;
 			splitResultMsg2 = "Split2 push";
+			msgGetMoneyS = "+ $ " + bet;
 		}else if(sumS > sumD) {
 			win++;
 			money += bet * 2;
 			splitResultMsg2 = "Split2 Win!";
+			msgGetMoney = "+ $ " + bet *2;
 		}else {
 			lose++;
 			splitResultMsg2 = "Split2 Lose";
+			msgGetMoneyS = "- $ " + bet;
 		}
 	}
 	//ダブルダウン時のジャッジ
@@ -343,13 +362,16 @@ public class BlackJack {
 			push++;
 			money += bet * 2;
 			msg = "push";
+			msgGetMoney = "+ $ " + bet*2;
 		}else if(sumP > sumD) {
 			win++;
 			money += bet * 4;
 			msg = "You Win!";
+			msgGetMoney = "+ $ " + bet*4;
 		}else {
 			lose++;
 			msg = "You Lose";
+			msgGetMoney = "- $ " + bet*2;
 		}
 	}
 
@@ -430,6 +452,7 @@ public class BlackJack {
 			bust++;
 			lose++;
 			msg = "Bust! You Lose!";
+			msgGetMoney = "- $ " + bet;
 			return true;
 		}else {
 			return false;
@@ -441,6 +464,7 @@ public class BlackJack {
 			bust++;
 			lose++;
 			msgS = "Bust! You Lose!";
+			msgGetMoney = "- $ " + bet;
 			return true;
 		}else {
 			return false;
@@ -452,6 +476,7 @@ public class BlackJack {
 			win++;
 			money += bet * 2;
 			msg = "Dealer Bust! You Win!";
+			msgGetMoney = "+ $ " + bet*2;
 			return true;
 		}else {
 			return false;
@@ -463,6 +488,7 @@ public class BlackJack {
 			win++;
 			money += bet * 4;
 			msg = "Dealer Bust! You Win!";
+			msgGetMoney = "+ $ " + bet*4;
 			return true;
 		}else {
 			return false;
