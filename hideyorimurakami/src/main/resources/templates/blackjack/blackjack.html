@@ -66,7 +66,7 @@ Your Money : $ [[${blackJack.money}]]<br>
 How much do you bet?<br>
 <form th:action="@{/blackjack}" method="post" th:name="form2">
 <select name = "bet">
-<th:block th:each="i : ${#numbers.sequence(1,9)}" th:switch="${i}">
+<th:block th:each="i : ${#numbers.sequence(1,20)}" th:switch="${i}">
 	<option th:case="1" th:value="|${i}000|">$ 1000</option>
 	<option th:case="*" th:value="|${i}000|">$ [[${i}]]000</option>
 </th:block>
