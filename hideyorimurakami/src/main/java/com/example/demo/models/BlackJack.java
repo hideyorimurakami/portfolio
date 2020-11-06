@@ -235,6 +235,8 @@ public class BlackJack {
 			doubledownCheck = 0;
 			hitP();
 			if(bustCheckP()) {
+				splitResultMsg1 = "Bust! Split1 Lose!";
+				msgGetMoney = "- $ " + bet;
 				splitEndP = 1;
 				if(splitEndP ==1&&splitEndS == 1) {
 					end = 1;
@@ -273,6 +275,8 @@ public class BlackJack {
 			doubledownCheck = 0;
 			hitS();
 			if(bustCheckS()) {
+				splitResultMsg2 = "Bust! Split2 Lose!";
+				msgGetMoneyS = "- $ " + bet;
 				splitEndS = 1;
 				if(splitEndP ==1&&splitEndS == 1) {
 					end = 1;
