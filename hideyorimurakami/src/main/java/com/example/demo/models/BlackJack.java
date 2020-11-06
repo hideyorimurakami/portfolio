@@ -204,10 +204,12 @@ public class BlackJack {
 				if(player.get(0).endsWith("A")) {
 					dealerDrawCard();
 					if(bustCheckD()) {
+						splitResultMsg1 = "Dealer Bust! Split1 Win!";
+						splitResultMsg2 = "Dealer Bust! Split2 Win!";
 						bustCheckD();
 						end = 1;
 					}else {
-						judgeP();
+						judgePS();
 						judgeS();
 						end = 1;
 					}
