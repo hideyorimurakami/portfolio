@@ -51,7 +51,7 @@ public class BlackJack {
 	public void newBet(int bet) {
 		this.bet = bet;
 		start = 1;
-		if(money <= 1000) {
+		if(money < 1000) {
 			money = 10000;
 		}
 	}
