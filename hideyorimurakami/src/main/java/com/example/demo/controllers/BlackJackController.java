@@ -60,8 +60,11 @@ public class BlackJackController {
 			if(bj.getMoney() <1000) {
 				bj.setMoney(10000);
 			}
+			bj.setErrorMsg("");
 			if(bet <= bj.getMoney()) {
 				bj.newBet(bet);
+			}else {
+				bj.setErrorMsg("You don't have enough money!!");
 			}
 
 		}
