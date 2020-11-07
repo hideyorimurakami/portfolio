@@ -29,6 +29,7 @@ public class BlackJack {
 	private String splitResultMsg2;
 	private String msgGetMoney;
 	private String msgGetMoneyS;
+	private String errorMsg;
 	private int splitCheck; //1の時スプリット可能
 	private int surrenderCheck; //1の時サレンダー可能
 	private int doubledownCheck; //1の時ダブルダウン可能
@@ -84,6 +85,7 @@ public class BlackJack {
 		splitResultMsg2 = "";
 		msgGetMoney = "";
 		msgGetMoneyS = "";
+		errorMsg = "";
 		round++;
 		money -= bet;
 		deckSet();
