@@ -56,25 +56,13 @@ function clickBtn1(){
 #button2 {cursor:pointer;background-color: red;color: white;}
 #data {display :none;}
 .msg{color:red;font-weight:bold;}
+
 </style>
 <title>BlackJack</title>
 </head>
 <body>
 Your Name : [[${name}]]<br>
-Your Money : $ [[${blackJack.money}]]<br>
-<th:block th:if="${blackJack.end ne 0}" >
-How much do you bet?<br>
-<form th:action="@{/blackjack}" method="post" th:name="form2">
-<select name = "bet">
-<th:block th:each="i : ${#numbers.sequence(1,20)}" th:switch="${i}">
-	<option th:case="1" th:value="|${i}000|">$ 1000</option>
-	<option th:case="*" th:value="|${i}000|">$ [[${i}]]000</option>
-</th:block>
-</select>
-<input th:if="${blackJack.end ne 0}" type="hidden"  name="select" value="0">
-<input th:if="${blackJack.end ne 0}" type="hidden"  name="selectS" value="0">
-</form>
-</th:block>
+
 <div th:if="${blackJack.end ne 1}">
 <h4>Dealer 1st: [[${blackJack.dealer1st}]]</h4>
 <table>
@@ -199,6 +187,23 @@ Split2
 
 
 </table>
+</th:block>
+Your Money : $ [[${blackJack.money}]]<br>
+<th:block th:if="${blackJack.end ne 0}" >
+How much do you bet?
+<div class="msg">
+ [[${blackJack.errorMsg}]]
+ </div>
+<form th:action="@{/blackjack}" method="post" th:name="form2">
+<select name = "bet">
+<th:block th:each="i : ${#numbers.sequence(1,20)}" th:switch="${i}">
+	<option th:case="1" th:value="|${i}000|">$ 1000</option>
+	<option th:case="*" th:value="|${i}000|">$ [[${i}]]000</option>
+</th:block>
+</select>
+<input th:if="${blackJack.end ne 0}" type="hidden"  name="select" value="0">
+<input th:if="${blackJack.end ne 0}" type="hidden"  name="selectS" value="0">
+</form>
 </th:block>
 <table border="1" th:if="${blackJack.end ne 0}">
 <tr>
