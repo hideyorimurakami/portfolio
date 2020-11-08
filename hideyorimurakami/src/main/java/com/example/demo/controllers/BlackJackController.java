@@ -55,13 +55,17 @@ public class BlackJackController {
 		bj = (BlackJack)s.getAttribute("bj");
 		//ユーザ名をセット
 		model.addAttribute("name",bju.getUsername());
+
 		//ゲーム終了時にニューベット
 		if(bj.getEnd() == 1) {
+			bj.setErrorMsg("");
+			bj.setNewGame(0);
 			if(bj.getMoney() <1000) {
 				bj.setMoney(10000);
 			}
-			bj.setErrorMsg("");
+
 			if(bet <= bj.getMoney()) {
+				bj.setErrorMsg("");
 				bj.newBet(bet);
 			}else {
 				bj.setErrorMsg("You don't have enough money!!");
