@@ -40,7 +40,8 @@ public class BlackJack {
 	private int sumS; //スプリットの合計値
 	private int sumD; //ディーラーの合計値
 	private int end = 1; //1の時終了
-	private int start; //1の時開始
+	private int start; //1の時ベット済み
+	private int newGame;//1の時ニューゲーム済み
 	private int splitOn; //1の時スプリット中
 	private int select; //選択肢
 	private int selectS;//スプリットの選択肢
@@ -52,7 +53,6 @@ public class BlackJack {
 	public void newBet(int bet) {
 		this.bet = bet;
 		start = 1;
-
 	}
 	//ニューゲーム
 	public void newGame() {
@@ -62,6 +62,7 @@ public class BlackJack {
 		dealer = null;
 		deck = null;
 		card = null;
+		newGame = 1;
 		splitCheck = 0;
 		surrenderCheck = 0;
 		doubledownCheck = 0;
@@ -156,6 +157,7 @@ public class BlackJack {
 		switch(select) {
 		//ヒットの場合
 		case 1:
+			errorMsg = "";
 			splitCheck = 0;
 			surrenderCheck = 0;
 			doubledownCheck = 0;
@@ -166,6 +168,7 @@ public class BlackJack {
 			break;
 		//ステイの場合
 		case 2:
+			errorMsg = "";
 			splitCheck = 0;
 			surrenderCheck = 0;
 			doubledownCheck = 0;
@@ -180,45 +183,58 @@ public class BlackJack {
 			break;
 		//ダブルダウンの場合
 		case 3:
-			splitCheck = 0;
-			surrenderCheck = 0;
-			doubledownCheck = 0;
-			doubledown();
-			if(bustCheckP()) {
-				end = 1;
-			}else {
-				dealerDrawCard();
-				if(bustCheckDD()){
+			if(bet <= money) {
+				errorMsg = "";
+				splitCheck = 0;
+				surrenderCheck = 0;
+				doubledownCheck = 0;
+				doubledown();
+				if(bustCheckP()) {
 					end = 1;
 				}else {
-					judgeDoubleDown();
-					end = 1;
-				}
-			}
-				break;
-		//スプリットの場合
-		case 4:
-			splitOn = 1;
-			splitCheck = 0;
-			surrenderCheck = 0;
-			doubledownCheck = 0;
-				split();
-				if(player.get(0).endsWith("A")) {
 					dealerDrawCard();
-					if(bustCheckD()) {
-						splitResultMsg1 = "Dealer Bust! Split1 Win!";
-						splitResultMsg2 = "Dealer Bust! Split2 Win!";
-						bustCheckD();
+					if(bustCheckDD()){
 						end = 1;
 					}else {
-						judgePS();
-						judgeS();
+						judgeDoubleDown();
 						end = 1;
 					}
 				}
+			}else {
+				errorMsg = "You don't have enough money!!";
+			}
+
+				break;
+		//スプリットの場合
+		case 4:
+			if(bet <= money) {
+				errorMsg = "";
+				splitOn = 1;
+				splitCheck = 0;
+				surrenderCheck = 0;
+				doubledownCheck = 0;
+					split();
+					if(player.get(0).endsWith("A")) {
+						dealerDrawCard();
+						if(bustCheckD()) {
+							splitResultMsg1 = "Dealer Bust! Split1 Win!";
+							splitResultMsg2 = "Dealer Bust! Split2 Win!";
+							bustCheckD();
+							end = 1;
+						}else {
+							judgePS();
+							judgeS();
+							end = 1;
+						}
+					}
+			}else {
+				errorMsg = "You don't have enough money!!";
+			}
+
 			break;
 		//サレンダーの場合
 		case 5:
+			errorMsg = "";
 			splitCheck = 0;
 			surrenderCheck = 0;
 			doubledownCheck = 0;
