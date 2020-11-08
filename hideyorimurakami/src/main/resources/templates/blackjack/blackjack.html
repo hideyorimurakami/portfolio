@@ -189,6 +189,11 @@ Split2
 </table>
 </th:block>
 Your Money : $ [[${blackJack.money}]]<br>
+<th:block th:if="${blackJack.newGame ne 0}" >
+<div class="msg">
+ [[${blackJack.errorMsg}]]
+ </div>
+ </th:block>
 <th:block th:if="${blackJack.end ne 0}" >
 How much do you bet?
 <div class="msg">
