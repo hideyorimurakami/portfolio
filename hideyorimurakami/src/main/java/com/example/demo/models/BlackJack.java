@@ -219,6 +219,7 @@ public class BlackJack {
 						if(bustCheckD()) {
 							splitResultMsg1 = "Dealer Bust! Split1 Win!";
 							splitResultMsg2 = "Dealer Bust! Split2 Win!";
+							msgGetMoneyS = "+ $ " + bet*2;
 							bustCheckD();
 							end = 1;
 						}else {
