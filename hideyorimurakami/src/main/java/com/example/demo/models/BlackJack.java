@@ -522,14 +522,14 @@ public class BlackJack {
 		msg = "Hit";
 		player.add(drawCard());
 		sumP();
-		bustCheckP();
+		
 	}
 	//スプリット2のヒット
 	public void hitS() {
 		msgS = "Hit";
 		split.add(drawCard());
 		sumS();
-		bustCheckS();
+		
 	}
 	//ステイ
 	public void stay() {
