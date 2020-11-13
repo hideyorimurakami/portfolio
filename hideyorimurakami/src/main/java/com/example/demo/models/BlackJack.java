@@ -120,7 +120,7 @@ public class BlackJack {
 					win++;
 					bjwin++;
 					msg = "BlackJack You Win!!";
-					msgGetMoney = "+ $ " + (bet + bet *1.5);
+					msgGetMoney = "+ $ " + (int)(bet + bet *1.5);
 					end  = 1;
 				}
 			}else {
@@ -142,7 +142,7 @@ public class BlackJack {
 					win++;
 					bjwin++;
 					msg = "BlackJack Win!!";
-					msgGetMoney = "+ $ " + (bet + bet *1.5);
+					msgGetMoney = "+ $ " + (int)(bet + bet *1.5);
 					end  = 1;
 			}else {
 				splitCheck();
@@ -522,14 +522,12 @@ public class BlackJack {
 		msg = "Hit";
 		player.add(drawCard());
 		sumP();
-		
 	}
 	//スプリット2のヒット
 	public void hitS() {
 		msgS = "Hit";
 		split.add(drawCard());
 		sumS();
-		
 	}
 	//ステイ
 	public void stay() {
