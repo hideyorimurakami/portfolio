@@ -372,7 +372,7 @@ public class BlackJack {
 			win++;
 			money += bet * 2;
 			splitResultMsg2 = "Split2 Win!";
-			msgGetMoney = "+ $ " + bet *2;
+			msgGetMoneyS = "+ $ " + bet *2;
 		}else {
 			lose++;
 			splitResultMsg2 = "Split2 Lose";
@@ -487,7 +487,7 @@ public class BlackJack {
 			bust++;
 			lose++;
 			msgS = "Bust! You Lose!";
-			msgGetMoney = "- $ " + bet;
+			msgGetMoneyS = "- $ " + bet;
 			return true;
 		}else {
 			return false;
@@ -500,6 +500,7 @@ public class BlackJack {
 			money += bet * 2;
 			msg = "Dealer Bust! You Win!";
 			msgGetMoney = "+ $ " + bet*2;
+			msgGetMoneyS = "+ $ " + bet*2;
 			return true;
 		}else {
 			return false;
