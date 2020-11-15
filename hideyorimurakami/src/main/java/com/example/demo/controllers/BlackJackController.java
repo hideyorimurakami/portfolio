@@ -23,7 +23,12 @@ public class BlackJackController {
 	BlackJack bj;
 	@GetMapping("/blackjack")
 	public String getBlackJack(Model model,HttpSession s,Principal principal ) {
-		bj = new BlackJack();
+		if((BlackJack)s.getAttribute("bj") != null){
+			bj = (BlackJack)s.getAttribute("bj");
+		}else {
+			bj = new BlackJack();
+		}
+
 		//ユーザ名と一致するBjUserをセット
 		bju = rep.findByUsername(principal.getName());
 		//各項目をデータベースから引き出す
