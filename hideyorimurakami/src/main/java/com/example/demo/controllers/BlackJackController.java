@@ -107,7 +107,7 @@ public class BlackJackController {
 			model.addAttribute("data",bju);
 
 		}else {
-			getBlackJack(model, s, principal);
+			postBlackJack(principal, bet, selectS, select, model, s);
 		}
 		return "blackjack/blackjack";
 	}
