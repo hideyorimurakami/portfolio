@@ -45,67 +45,68 @@ public class BlackJackController {
 		//bjオブジェクトをセット
 		model.addAttribute("blackJack" ,bj);
 		//Post送信
-		postBlackJack(0, 0, 0, model, s);
+		postBlackJack(principal,0, 0, 0, model, s);
 		return "blackjack/blackjack";
 	}
 	@PostMapping("/blackjack")
-	public String postBlackJack(@RequestParam int bet ,@RequestParam int selectS,@RequestParam int select, Model model,HttpSession s) {
-		//セッション情報を取得
-		bju = (BjUser)s.getAttribute("bju");
-		bj = (BlackJack)s.getAttribute("bj");
-		//ユーザ名をセット
-		model.addAttribute("name",bju.getUsername());
-
-		//ゲーム終了時にニューベット
-		if(bj.getEnd() == 1) {
-			bj.setErrorMsg("");
-			bj.setNewGame(0);
-			if(bj.getMoney() <1000) {
-				bj.setMoney(10000);
-			}
-
-			if(bet <= bj.getMoney()) {
+	public String postBlackJack(Principal principal ,@RequestParam int bet ,@RequestParam int selectS,@RequestParam int select, Model model,HttpSession s) {
+		BjUser b = (BjUser)s.getAttribute("bju");
+		String n = b.getUsername();
+		if(principal.getName().equals(n)) {
+			//セッション情報を取得
+			bju = (BjUser)s.getAttribute("bju");
+			bj = (BlackJack)s.getAttribute("bj");
+			//ユーザ名をセット
+			model.addAttribute("name",bju.getUsername());
+			//ゲーム終了時にニューベット
+			if(bj.getEnd() == 1) {
 				bj.setErrorMsg("");
-				bj.newBet(bet);
-			}else {
-				bj.setErrorMsg("You don't have enough money!!");
+				bj.setNewGame(0);
+				if(bj.getMoney() <1000) {
+					bj.setMoney(10000);
+				}
+				if(bet <= bj.getMoney()) {
+					bj.setErrorMsg("");
+					bj.newBet(bet);
+				}else {
+					bj.setErrorMsg("You don't have enough money!!");
+				}
 			}
+			//ニューゲーム
+			if(bj.getStart() == 1 && bj.getBet() != 0) {
+				bj.newGame();
+			}
+			//選択肢をセット
+			bj.setSelectS(selectS);
+			bj.setSelect(select);
+			//スプリット時の選択肢メソッド
+			if(bj.getSplitOn() == 1) {
+				bj.selectPS();
+				bj.selectS();
+				//通常時の選択肢メソッド
+			}else {
+				bj.selectP();
+			}
+			//各項目をデータベースに登録
+			bju.setRound(bj.getRound());
+			bju.setWin(bj.getWin());
+			bju.setBjwin(bj.getBjwin());
+			bju.setLose(bj.getLose());
+			bju.setSurrender(bj.getSurrender());
+			bju.setSplitround(bj.getSplitround());
+			bju.setDoubledown(bj.getDoubledown());
+			bju.setBust(bj.getBust());
+			bju.setPush(bj.getPush());
+			bju.setMoney(bj.getMoney());
+			rep.save(bju);
+			//セッション情報にセット
+			s.setAttribute("bju", bju);
+			s.setAttribute("bj", bj);
+			//オブジェクトをセット
+			model.addAttribute("blackJack" ,bj);
+			model.addAttribute("data",bju);
 
 		}
-		//ニューゲーム
-		if(bj.getStart() == 1 && bj.getBet() != 0) {
-			bj.newGame();
-		}
-		//選択肢をセット
-		bj.setSelectS(selectS);
-		bj.setSelect(select);
-		//スプリット時の選択肢メソッド
-		if(bj.getSplitOn() == 1) {
-			bj.selectPS();
-			bj.selectS();
-			//通常時の選択肢メソッド
-		}else {
-			bj.selectP();
-		}
-		//各項目をデータベースに登録
-		bju.setRound(bj.getRound());
-		bju.setWin(bj.getWin());
-		bju.setBjwin(bj.getBjwin());
-		bju.setLose(bj.getLose());
-		bju.setSurrender(bj.getSurrender());
-		bju.setSplitround(bj.getSplitround());
-		bju.setDoubledown(bj.getDoubledown());
-		bju.setBust(bj.getBust());
-		bju.setPush(bj.getPush());
-		bju.setMoney(bj.getMoney());
-		rep.save(bju);
-
-		//セッション情報にセット
-		s.setAttribute("bju", bju);
-		s.setAttribute("bj", bj);
-		//オブジェクトをセット
-		model.addAttribute("blackJack" ,bj);
-		model.addAttribute("data",bju);
 		return "blackjack/blackjack";
 	}
 }
