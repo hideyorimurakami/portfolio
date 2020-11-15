@@ -23,11 +23,9 @@ public class BlackJackController {
 	BlackJack bj;
 	@GetMapping("/blackjack")
 	public String getBlackJack(Model model,HttpSession s,Principal principal ) {
-		if((BlackJack)s.getAttribute("bj") != null){
-			bj = (BlackJack)s.getAttribute("bj");
-		}else {
-			bj = new BlackJack();
-		}
+
+		bj = new BlackJack();
+
 
 		//ユーザ名と一致するBjUserをセット
 		bju = rep.findByUsername(principal.getName());
@@ -112,7 +110,7 @@ public class BlackJackController {
 			model.addAttribute("data",bju);
 
 		}else {
-			postBlackJack(principal, 0, 0, 0, model, s);
+			getBlackJack(model, s, principal);
 		}
 		return "blackjack/blackjack";
 	}
