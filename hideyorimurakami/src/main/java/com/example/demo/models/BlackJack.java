@@ -499,8 +499,6 @@ public class BlackJack {
 			win++;
 			money += bet * 2;
 			msg = "Dealer Bust! You Win!";
-			msgGetMoney = "+ $ " + bet*2;
-			msgGetMoneyS = "+ $ " + bet*2;
 			return true;
 		}else {
 			return false;
